@@ -116,15 +116,16 @@ with tabs[2]:
 
     # Filtrar os dados pelo time selecionado
     filtered_df = df[df['player'] == optiono]
+    timeplayer = filtered_df["team_name"].values
 
-    fig1 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["pts_per_game"], mode='lines+markers', name='Points per game', marker=dict(color='orange') )])
+    fig1 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["pts_per_game"], mode='lines+markers', name='Points per game', marker=dict(color='orange'), customdata= filtered_df["team_name"].values, hovertemplate='Temporada: %{x}<br>Pontos por jogo: %{y}<br>Time: %{customdata}')])
     fig1.update_layout(title=f'Pontos por jogo do {optiono}', xaxis_title='Temporada', yaxis_title='Pontos por jogo')
     st.plotly_chart(fig1)
 
-    fig2 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["ast_per_game"], mode='lines+markers', name='Assists per game', marker=dict(color='purple'))])
+    fig2 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["ast_per_game"], mode='lines+markers', name='Assists per game', marker=dict(color='purple'), customdata= filtered_df["team_name"].values, hovertemplate='Temporada: %{x}<br>Assistências por jogo: %{y}<br>Time: %{customdata}')])
     fig2.update_layout(title=f'Assistências por jogo do {optiono}', xaxis_title='Temporada', yaxis_title='Assistências por jogo')
     st.plotly_chart(fig2)
 
-    fig3 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["trb_per_game"], mode='lines+markers', name='Rebounds per game', marker=dict(color='green'))])
+    fig3 = go.Figure(data=[go.Scatter(x=filtered_df["season"], y=filtered_df["trb_per_game"], mode='lines+markers', name='Rebounds per game', marker=dict(color='green'), customdata= filtered_df["team_name"].values, hovertemplate='Temporada: %{x}<br>Rebotes por jogo: %{y}<br>Time: %{customdata}')])
     fig3.update_layout(title=f'Rebotes por jogo do {optiono}', xaxis_title='Temporada', yaxis_title='Rebotes por jogo')
     st.plotly_chart(fig3)
